@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OptionPrice Calculator</title>
+    <style type="text/css">
+        table{
+            margin-left: 20px;
+            margin-right: 20px;
+            border: thin solid black;
+        }
+        td, th{
+            border: thin dotted grey;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form action="calc.html" , method ="get">
+        <table >
+            <tr>
+                <th>Parameters</th>
+                <th>Underlying</th>
+                <th> Strike Price</th>
+                <th>Type</th>
+                <th>Direction</th>
+                <th>Quantity</th>
+            </tr>
+            <tr>
+                <td>Values</td>
+                <td><input  type="text" name="underlying" value="ag1606" /></td>
+                <td><input type="text" name="strikeprice" value="3330"/></td>
+                <td>
+                    <input type="radio" name="callput" value="call">call<br/>
+                    <input type="radio" name="callput" value="put"/>put<br/>
+                </td>
+                <td>
+                    <input type="radio" name="longshort" value="long"/>long<br/>
+                    <input type="radio" name="longshort" value="short"/>short<br/>
+                </td>
+                <td>
+                    <input type="text" name="quantity" value="1"/>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="submit" value="Calculate"/><br/></td>
+            </tr>
+            <tr>
+                <td>OptionPrice: </td>
+                <td>{{ optionprice }}</td>
+            </tr>
+            </table>
+        </form>
+</body>
+</html>

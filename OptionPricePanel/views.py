@@ -3,14 +3,19 @@ from django.http import HttpResponse
 from django.template import Template,Context
 from django.template.loader import get_template
 from django.shortcuts import render_to_response
+from OptionEngine.optionengine import *
 import MySQLdb
+import datetime
 
-import  datetime
+
 def hello(request):
     return HttpResponse("hello mysite")
 
+
 def homepage(request):
     return HttpResponse("This is default home page")
+    #return render_to_response('calculator.html')
+
 
 def systime(request):
     now = datetime.datetime.now()
@@ -19,9 +24,27 @@ def systime(request):
     return HttpResponse(html)
 
 
+def calc(request):
+    if(request.method == 'GET'):
+        underlying = request.GET['underlying']
+        strikeprice = request.GET['strikeprice']
+        callput = request.GET['callput']
+        longshort = request.GET['longshort']
+        quantity = request.GET['quantity']
+        optionprice = '150'
+        res = pyoptioncalculator.GBSMtest()
+        optionprice = res
+    #   return render_to_response("calc.html", {'underlying':underlying, 'stikeprice':strikeprice, 'callput':callput,
+    #                                          'longshort':longshort, 'quantity':quantity, 'optionprice':optionprice})
+        return render_to_response("calc.html", {'optionprice':optionprice})
+
+def optionpricecalculator(request):
+    return render_to_response("Calculator.html")
+
+
 def optionpricemain(request):
     #return render_to_response('PriceMainPage.html', {'AgPrice': '2000'})
-    db = MySQLdb.connect(user= 'root', db= 'vol', passwd = '223223', host = '127.0.0.1')
+    db = MySQLdb.connect(user= 'root', db='vol', passwd='223223', host = '127.0.0.1')
     cursor = db.cursor()
     cursor.execute('select Price from InstrumentVol')
     price = [row[0] for row in cursor.fetchall()]
