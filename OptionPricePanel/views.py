@@ -27,13 +27,14 @@ def systime(request):
 def calc(request):
     if(request.method == 'GET'):
         underlying = request.GET['underlying']
-        strikeprice = request.GET['strikeprice']
+        strikeprice = float(request.GET['strikeprice'])
         callput = request.GET['callput']
         longshort = request.GET['longshort']
         quantity = request.GET['quantity']
-        optionprice = '150'
-        res = pyoptioncalculator.GBSMtest()
-        optionprice = res
+        res = pyoptioncalculator.GBSMandGreeksBasic(longshort, callput, strikeprice)
+        #res = pyoptioncalculator.GBSMtest()
+
+        optionprice =float(quantity) *  res
     #   return render_to_response("calc.html", {'underlying':underlying, 'stikeprice':strikeprice, 'callput':callput,
     #                                          'longshort':longshort, 'quantity':quantity, 'optionprice':optionprice})
         return render_to_response("calc.html", {'optionprice':optionprice})
