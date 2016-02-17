@@ -26,5 +26,7 @@ urlpatterns = patterns('',
     ('^OptionPriceCalculator/$', optionpricecalculator),
     ('^OptionPriceCalculator/[^/]+', calc),
     ('^$', homepage),
+                       ('^AjaxtTest/$', ajaxtest),
+
 
 )

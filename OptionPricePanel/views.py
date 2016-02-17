@@ -55,3 +55,12 @@ def optionpricemain(request):
     #o = get_template('PriceMainPage.html')
     #html = o.render(Context({'Ag1606Price': price}))
     #return HttpResponse(html)
+
+
+def ajaxtest(request):
+    db = MySQLdb.connect(user= 'root', db='vol', passwd='223223', host = '127.0.0.1')
+    cursor = db.cursor()
+    cursor.execute('select Price from InstrumentVol')
+    price = [row[0] for row in cursor.fetchall()]
+    db.close()
+    return render_to_response('AjaxTestPrice.html', {'ajaxprice': price[0]})
